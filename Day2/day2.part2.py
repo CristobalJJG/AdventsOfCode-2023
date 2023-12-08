@@ -1,15 +1,14 @@
-map = {
-    'red': 12,
-    'green':13,
-    'blue': 14,
-}
-    
 def main(string) :
     lines = string.split('\n')
-    ig = 1
-    res = []
+    res = 0
     # Format of the data 
     for l in lines:
+        
+        map1 = {
+            'red': 0,
+            'green':0,
+            'blue': 0,
+        }
         flag = True
         sets = l.split(': ')[1].split('; ')
         for s in sets:
@@ -17,12 +16,14 @@ def main(string) :
             if not flag: break
             for r in game:
                 sec = r.split(' ')
-                if(int(sec[0]) > map[sec[1]]): flag=False; break 
-            
-        if flag: res.append(ig)
-        ig += 1
-    
-    print(sum(res))
+                if(int(sec[0]) > int(map1[sec[1]])): 
+                    map1[sec[1]] = sec[0]
+                    
+        power = 1;    
+        for v in map1.values():
+            power *= int(v)
+        res += power
+    print(res)
     
         
         
